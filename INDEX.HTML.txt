@@ -1,0 +1,520 @@
+I'll help you build an animated website for your crockery store! Here's a complete, modern design with smooth animations, responsive layout, and e-commerce ready features.
+
+## Complete HTML/CSS/JS Code
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Crockery - Premium Tableware</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4a574, #b8956e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(135deg, #d4a574, #b8956e);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: linear-gradient(135deg, #d4a574, #b8956e);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 165, 116, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f8f4f0" width="1200" height="800"/><circle fill="%23d4a574" opacity="0.1" cx="200" cy="200" r="150"/><circle fill="%23b8956e" opacity="0.08" cx="1000" cy="600" r="200"/><path fill="%23e8d9c6" opacity="0.2" d="M300 400 Q500 300 700 450 Q900 550 1100 400"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 1s ease forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, white, #f0e6d2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a574, #b8956e);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.8);
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .float-item {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-item:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .float-item:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .float-item:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Products Section */
+        .products {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #d4a574, #b8956e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .product-card.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(212, 165, 116, 0.3);
+        }
+
+        .product-image {
+            height: 300px;
+            background: linear-gradient(135deg, #f8f4f0, #e8d9c6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .product-card:hover .product-image::before {
+            left: 100%;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4a574, #b8956e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #d4a574, #b8956e);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 165, 116, 0.4);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, #f8f4f0 0%, #e8d9c6 100%);
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #d4a574, #b8956e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c2c2c;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #d4a574;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Elegance Crockery</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cart-btn">
+                <i class="fas fa-shopping-cart"></i> Cart (0)
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-elements">
+            <div class="float-item" style="font-size: 3rem; color: rgba(255,255,255,0.1);">
+                <i class="fas fa-gem"></i>
+            </div>
+            <div class="float-item" style="font-size: 2.5rem; color: rgba(255,255,255,0.08);">
+                <i class="fas fa-spa"></i>
+            </div>
+            <div class="float-item" style="font-size: 3.5rem; color: rgba(255,255,255,0.1);">
+                <i class="fas fa-crown"></i>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1>Timeless Elegance</h1>
+            <p>Discover premium crockery that transforms every meal into a celebration. Crafted with passion, designed for perfection.</p>
+            <div class="cta-buttons">
+                <a href="#products" class="btn-primary">Shop Collection</a>
+                <a href="#about" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products reveal">
+        <h2 class="section-title">Featured Collection</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-coffee" style="font-size: 4rem; color: #d4a574; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Royal Coffee Set</h3>
+                    <div class="product-price">$89</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-utensils" style="font-size: 4rem; color: #b8956e; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Dinner Plate Set</h3>
+                    <div class="product-price">$149</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-wine-glass" style="font-size: 4rem; color: #d4a574; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Crystal Wine Glasses</h3>
+                    <div class="product-price">$69</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-cheese" style="font-size: 4rem; color: #b8956e; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Porcelain Serveware</h3>
+                    <div class="product-price">$199</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features reveal">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3>Free Shipping</h3>
+                <p>Enjoy free shipping on orders over $50. Delivered to your door with care.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Premium Quality</h3>
+                <p>Handcrafted with the finest materials. Built to last a lifetime.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-undo"></i>
+                </div>
+                <h3>30-Day Returns</h3>
+               
